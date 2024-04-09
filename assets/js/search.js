@@ -1,13 +1,15 @@
-window.addEventListener('load', function() {console.log('Loaded search.js')});
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('form[role=search]').addEventListener('submit', function() { return false });
+    document.querySelector('form[role=search]').addEventListener('submit', function(event) {
+        event.preventDefault();
+        return false;
+    });
 
     let contentElement = document.querySelector('article.main');
-    let contentElementCopy = contentElement.cloneNode(true);
+    let contentElementStarter = contentElement.cloneNode(true);
 
     document.getElementById('search-field').addEventListener('input', function(event) {
         // Start from initial state
-        contentElement.innerHTML = contentElementCopy.innerHTML;
+        contentElement.innerHTML = contentElementStarter.innerHTML;
 
         // Get search text from input
         let searchText = event.target.value;
